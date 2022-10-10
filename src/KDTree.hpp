@@ -284,18 +284,8 @@ void KDTree<N, ElemType>::KNNValueRecurse(const Point<N>& key, BoundedPQueue<Nod
 template <size_t N, typename ElemType>
 std::vector<ElemType> KDTree<N, ElemType>::knn_query(const Point<N>& key,
     size_t k) const {
-    std::vector<std::pair<ElemType, double> > tipo;
-    KDTreeNode<value_type>* cNode = root;
-    size_t nivel = 0;
-
-    knn_aux(key, cNode, nivel, tipo);
-    std::sort(tipo.begin(), tipo.end(), [](const auto& x, const auto& y) { return x.second < y.second; });
-
-    std::vector<ElemType> val;
-    for (size_t i = 0; i < k; i++) {
-        val.push_back(tipo[i].first);
-    }
-    return val;
+    ElemType new_element;
+    return new_element;
 }
 template<size_t N, typename ElemType>
 ElemType KDTree<N, ElemType>::FindMostCommonValueInPQ(BoundedPQueue<Node*> nearestPQ) const
