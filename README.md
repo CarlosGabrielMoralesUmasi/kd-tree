@@ -36,7 +36,62 @@ Some key features of the implementation are:
 
 ## File: Point.hpp
 This file defines the Point class, which represents a point in N-dimensional space. The Point class is used to store the keys in the KDTree structure.
+The `Point.hpp` file contains the definition of the Point class, which includes the following functionality:
 
+- `size_t size() const`: Returns the number of dimensions of the point.
+- `double& operator[](size_t index)`: Overload of the operator [] to access the coordinates of the point.
+- `double operator[](size_t index) const`: Overloading of the operator [] to access the coordinates of the point constantly.
+- `iterator begin()`: Returns an iterator at the beginning of the coordinates of the point.
+- `iterator end()`: Returns an iterator at the end of the coordinates of the point.
+- `const_iterator begin() const`: Returns a constant iterator at the beginning of the coordinates of the point.
+- `const_iterator end() const`: Returns a constant iterator at the end of the coordinates of the point.
+- `friend std::ostream& operator<<(std::ostream& out, const Point& lhs)`: Insertion operator overload to print point in the format [ x1 - x2 - ... - xn ].
+- `double distance(const Point<N>& one, const Point<N>& two)`: Function to calculate the distance between two points in space.
+- `bool operator==(const Point<N>& one, const Point<N>& two)`: Overload of the equality operator to check if two points are equal.
+- `bool operator!=(const Point<N>& one, const Point<N>& two)`: Overload of the inequality operator to check if two points are different.
+
+### Use
+To use the Point class, the following steps must be followed:
+1. Include the `Point.hpp` header file in the program.
+2. Create objects of class Point specifying the number of dimensions.
+3. Access the coordinates of the point using the [] operator.
+4. Use the provided functionalities, such as calculating the distance between points, checking for equality or inequality, and iterating over the coordinates of the point.
+
+### Implementation Details
+The Point class is implemented using an array of type `double` to store the coordinates of the point. Overloaded functions and operators are used to make it easier to access and manipulate point coordinates, as well as to perform calculations and comparisons between points.
+
+The `distance` function calculates the Euclidean distance between two points using the appropriate mathematical formula.
+
+### Usage Example
+```cpp
+#include "Point.hpp"
+#include <iostream>
+
+int main() {
+   // Create a 3-dimensional point
+   Point<3>p;
+  
+   // Access the coordinates of the point
+   p[0] = 1.0;
+   p[1] = 2.0;
+   p[2] = 3.0;
+  
+   // Print the point
+   std::cout << "Point: " << p << std::endl;
+  
+   // Calculate the distance between two points
+   Point<3>q;
+   q[0] = 4.0;
+   q[1] = 5.0;
+   q[2] = 6.0;
+   double dist = distance(p, q);
+   std::cout << "Distance between points: " << dist << std::endl;
+  
+   return 0;
+}
+```
+This is just a basic example of using the Point class. You can use the provided functionalities according to your specific needs.
+- Remember that you must include the `KDTree.hpp` and `Point.hpp` header files in your program and compile it correctly in order to use the provided classes and functionality.
 ## File: BoundedPQueue.hpp
 This file defines the BoundedPQueue class, which is a bounded priority queue used in the k-nearest neighbor query implementation. The BoundedPQueue class allows efficient insertion and retrieval of the k nearest nodes based on their distance to a given key.
 ## Methods
