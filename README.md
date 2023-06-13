@@ -92,8 +92,61 @@ int main() {
 ```
 This is just a basic example of using the Point class. You can use the provided functionalities according to your specific needs.
 - Remember that you must include the `KDTree.hpp` and `Point.hpp` header files in your program and compile it correctly in order to use the provided classes and functionality.
+
 ## File: BoundedPQueue.hpp
-This file defines the BoundedPQueue class, which is a bounded priority queue used in the k-nearest neighbor query implementation. The BoundedPQueue class allows efficient insertion and retrieval of the k nearest nodes based on their distance to a given key.
+- The code is the C++ implementation of a Bounded Priority Queue. A bounded priority queue is a data structure that stores items along with their priority and keeps items with the lowest priorities. If the queue exceeds a specified maximum size, the item with the highest priority is removed.
+- This file defines the BoundedPQueue class, which is a bounded priority queue used in the k-nearest neighbor query implementation. The BoundedPQueue class allows efficient insertion and retrieval of the k nearest nodes based on their distance to a given key.
+
+The `BoundedPQueue.hpp` file contains the definition of the BoundedPQueue class, which includes the following functionality:
+
+- `BoundedPQueue(size_t maxSize)`: Constructor of the BoundedPQueue class.
+- `T dequeueMin()`: Returns and removes the element with the lowest priority from the queue.
+- `size_t size() const`: Returns the number of elements in the queue.
+- `bool empty() const`: Check if the queue is empty.
+- `size_t maxSize() const`: Returns the maximum number of elements that can be stored in the queue.
+- `double best() const`: Returns the lowest priority of an element in the queue. If the queue is empty, it returns `numeric_limits<double>::infinity()`.
+- `double worst() const`: Returns the highest priority of an element in the queue. If the queue is empty, it returns `numeric_limits<double>::infinity()`.
+- `void enqueue(const T& value, double priority)`: Adds an element to the queue with the specified priority.
+
+### Implementation Details
+The bounded priority queue is implemented using a `multimap` that associates priorities with elements. Items are stored in ascending order of priority. If the queue exceeds the specified maximum size, the item with the highest priority (last item in the map) is removed.
+
+Some key features of the implementation are:
+- `enqueue(const T& value, double priority)`: Adds the element to the map and removes the last element if the size exceeds the maximum size.
+- `dequeueMin()`: Copies the element with the lowest priority from the map and removes it.
+
+### Use
+To use the BoundedPQueue class, the following steps must be followed:
+1. Include the `BoundedPQueue.hpp` header file in the program.
+2. Create a `BoundedPQueue<T>` object specifying the maximum size in the constructor.
+3. Add elements to the queue using the `enqueue(const T& value, double priority)` method.
+4. Get the element with the lowest priority using the `dequeueMin()` method.
+5. Check the size of the queue using the `size()` method.
+6. Check if the queue is empty using the `empty()` method.
+7. Get the lowest priority using the `best()` method.
+8. Get the highest priority using the `worst()` method.
+
+```
+#include "BoundedPQueue.hpp"
+#include <iostream>
+
+int main() {
+BoundedPQueue<int> pq(5);
+pq.enqueue(10, 2.5);
+pq.enqueue(20, 1.8);
+pq.enqueue(30, 4.2);
+pq.enqueue(40, 3.1);
+
+std::cout << "Size: " << pq.size() << std::endl;  // Output: Size: 4
+
+while (!pq.empty()) {
+    std::cout << pq.dequeueMin() << std::endl;
+}
+
+return 0;
+}
+```
+
 ## Methods
 Use the available methods to perform operations on the KD-Tree. Some of the key methods include:
 
